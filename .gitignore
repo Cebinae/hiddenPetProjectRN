@@ -40,10 +40,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 ios/
-android/
 __tests__
 .bundle
 .vscode
+eslintrc.js
 
 # fastlane
 #
