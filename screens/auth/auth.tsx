@@ -48,7 +48,7 @@ const styles = StyleSheet.create(
             // alignItems: 'center',
             flex: 1,
             width: '100%',
-            backgroundColor:colors.bg700,
+            backgroundColor:colors.bg1000,
             alignContent:'center'
             },
         
@@ -145,7 +145,7 @@ let continueLogged = async()=>{
                     keyboardShouldPersistTaps='handled'
                     >
  
-            <StatusBar backgroundColor={colors.bg700}></StatusBar>  
+            <StatusBar backgroundColor={colors.bg1000}></StatusBar>  
 
             <View style={styles.form}>             
                 <KeyInputSection sectionLabel="Public API key"
