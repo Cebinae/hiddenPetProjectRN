@@ -5,9 +5,13 @@ import CustomHeader from "../header";
 import { colors } from "../../../globalColors";
 import ItemsPool from "./itemsPool";
 import Start from "./startButton";
-
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 export default function Resulting(){
+
+    React.useEffect(()=>{
+        changeNavigationBarColor(colors.bg400)
+    })
 
     const styles= {
         background:{      

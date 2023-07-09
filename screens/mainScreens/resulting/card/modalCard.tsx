@@ -4,11 +4,17 @@ import FastImage from 'react-native-fast-image';
 import { colors } from '../../../../globalColors';
 import { shortExterior } from './cardData';
 import { useNavigation } from '@react-navigation/native';
-
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 export default function modalCard(props:{
     closeFnc:any, itemToShow:object
 }) {
+    let navigation = useNavigation()
+    React.useEffect(()=>{
+        navigation.addListener('blur', props.closeFnc) 
+        setTimeout(() => {
+            StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.47)')
+        }, 260);})
 
     let styles = {
         wrapper:{
@@ -127,17 +133,15 @@ export default function modalCard(props:{
        
     }
 
-let navigation = useNavigation()
 
-React.useEffect(()=>{
-    navigation.addListener('blur', props.closeFnc)
-})
+
+
 
 
     return(
 
         <>
-        <StatusBar backgroundColor={'rgba(0, 0, 0, 0.72)'}></StatusBar>
+        {/* <StatusBar backgroundColor={'rgba(0, 0, 0, 0.72)'}></StatusBar> */}
         <Pressable style={styles.modalBackground}              
                 onPress={()=> {
                     navigation.removeListener('blur', props.closeFnc)

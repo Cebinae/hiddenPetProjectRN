@@ -5,11 +5,19 @@ import CustomHeader from "../header"
 import  { colors } from "../../../globalColors"
 import { useDispatch } from "react-redux"
 import { setTabbar } from "../../../store/listsSlices/listsScreenSlice"
-
+import { useNavigation } from '@react-navigation/native';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 export const sectionContext = React.createContext(0)
 
 export default function SetList(){
+
+let navigation = useNavigation()
+React.useEffect(()=>{
+    navigation.addListener('focus',  ()=>changeNavigationBarColor(colors.bg400))
+}, [])
+
+
 
 const styles= {
     background:{
@@ -36,7 +44,7 @@ Keyboard.addListener( 'keyboardDidHide', ()=> dispatch(setTabbar('flex')) )   //
 
 
     <View style={styles.background}  >
-        <CustomHeader name='Set filtering lists'></CustomHeader>
+        <CustomHeader name='Configure titles and filters'></CustomHeader>
 
         <View style={{height:'100%'}}>
             <ScrollView  keyboardDismissMode="none"  keyboardShouldPersistTaps="handled" contentContainerStyle={styles.scrollView}>

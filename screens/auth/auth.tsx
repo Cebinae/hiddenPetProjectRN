@@ -8,7 +8,7 @@ import {resumeWithKeys,} from "./authorizate";
 import { colors, radius } from "../../globalColors";
 import AuthModal from "./modals/authModal";
 import KeyInputSection from "./inputSection";
-
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 let init = async()=>{
     await notifee.createChannel({
@@ -21,7 +21,6 @@ init()
 
 
 
-
 export default function Auth(){
 const formWight = Dimensions.get('window').width/100*80
 const formHeight = Dimensions.get('window').height/100*33
@@ -31,13 +30,7 @@ const navigation = useNavigation()
 const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
-
-// React.useEffect(()=>{
-//     console.log('IS LOGGED,', store.getState().settings.isLogged)
-// })
-
-
-const [top, setTop] = React.useState(0)
+React.useEffect(()=>changeNavigationBarColor(colors.bg1000))
 
 const styles = StyleSheet.create(
     {
@@ -57,8 +50,7 @@ const styles = StyleSheet.create(
             backgroundColor: colors.bg700,
             height: formHeight,
             width: formWight,
-            alignSelf:'center', 
-            top:top,
+            alignSelf:'center',   
             display:'flex',
             flexDirection:'column',
             justifyContent:'space-evenly',

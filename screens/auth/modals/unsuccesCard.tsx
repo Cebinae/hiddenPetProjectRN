@@ -28,13 +28,18 @@ export default function UnsuccessCard(){
             alignItems:'center',
             justifyContent:'center'
             },
-        pepeImage:{
-            width:'40%',
-            height:'34%',
+        pepeWrapper:{
             position:'absolute',
             bottom:0,
-            left:0,
-            borderRadius:radius.big
+            left:0, 
+            height:'35%',
+            width:'100%',
+        },
+        pepeImage:{
+            width:'46%',
+            height:'100%',   
+            borderBottomLeftRadius:radius.big
+     
         }
     }
     return(
@@ -59,11 +64,16 @@ export default function UnsuccessCard(){
                 
             </View>
 
-            <FastImage source={{
-                    uri:'https://iili.io/HPr20rB.png'
-                }}
-                style={styles.pepeImage}
-                ></FastImage>
+            <View style={styles.pepeWrapper}>
+                <FastImage source={{
+                        uri:'https://iili.io/HPr20rB.png'
+                    }}
+                    style={styles.pepeImage}
+                    resizeMode={FastImage.resizeMode.stretch}
+
+                    ></FastImage>
+            </View>
+
         </View>
     )
 }

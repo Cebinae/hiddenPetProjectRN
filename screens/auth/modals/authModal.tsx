@@ -14,6 +14,11 @@ export default function AuthModal(props:{
     isSuccessful: boolean, changeState:any
 }){
 
+React.useEffect(()=>{
+    setTimeout(() => {
+        StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.28)')
+    }, 260);
+})
 
 
 let styles={
@@ -30,7 +35,7 @@ let styles={
         
         <Pressable style={styles.background}
             onPress={()=> props.changeState()}>
-            <StatusBar backgroundColor={'rgba(0, 0, 0, 0.55)'}></StatusBar>
+            {/* <StatusBar backgroundColor={'rgba(0, 0, 0, 0.37)'}></StatusBar> */}
             {props.isSuccessful? <SuccessCard></SuccessCard>:<UnsuccessCard></UnsuccessCard>}
 
         </Pressable>

@@ -2,7 +2,7 @@
 # SkinHunter
 
 The main purpose of this application is to provide ecnanced tool
-for trading CS:GO skins on the most popular marketplace of csgo ecosystem - Dmarket.com. Depending on personal strategy, it will either save your time or increase incomes by giving a significant advantage in ability to rely on SkinHunter background service instead of daily seeking of profitable offers.
+for trading CS:GO skins on the most popular marketplace of csgo ecosystem - Dmarket.com. Depending on personal strategy, it will either save your time or increase incomes by giving a significant advantage in ability to rely on SkinHunter's background service instead of daily seeking of profitable offers.
 Some minor fixes upcoming.
 
 
@@ -40,11 +40,11 @@ Some minor fixes upcoming.
 
 ## Usage example/previews
 ### Authorization
--  To log in by API keys you need to generate a key pair in account settings=>trading API (settings on dmarket.com) or use already created
+-  To log in by API keys you need to generate a key pair in account settings=>trading API (settings on dmarket.com) or use previously created
 - You may continue unlogged by pressing on text as shown on screenshot
 - Safety question disclosed in FAQ
 
-![login screen](https://iili.io/HsqdUXt.png)
+![login screen](https://iili.io/Hs5UPX1.png)
 
 ### Configuring service
 - Depending on you strategy you may want to set different filters
@@ -52,21 +52,21 @@ Some minor fixes upcoming.
   - Pick filters for each section of titles. Filters only apply for skins in the same section. 
   - Skins that didn't pass filters won't be shown
 
-  ![setLists screen](https://iili.io/HsqqRLB.png)
+  ![setLists screen](https://iili.io/Hs5UQ1a.png)
 
 ### Service results
 -  Waiting until result appears may take a while depending on case
 - On long press you can see a more detailed description card
 - 'Open in market' button opens selected offer in browser
 
-  ![setLists screen](https://iili.io/HsqnAX4.png)
+  ![setLists screen](https://iili.io/Hs5Umep.png)
 
 ### Settings
 - At the top you can see you current profile information and balance in USD if you're logged or a suggestion to Log In if you're unlogged now.
 - 'Should display...' switch defines if only offers that were created during the service will be shown. May be useful to get rid of outdated offers that passed filters. If NO, alredy existed offers will be shown, but ofc you will not be notificated about that.
 - 'Delay' switch allows to basically select delay between each request to server. As rate limits that noticed in API documentation seems to be uncorrect, application provides custom values based on author usage experience.
 
-![setLists screen](https://iili.io/HsqIGcB.png)
+![setLists screen](https://iili.io/Hs5gf2f.png)
 ## FAQ
 ### Is this even safe?
 - Yes, your keys are never stored unencrypted. Application uses react-native-keychain to store credentials. Application gets keys from encrypted storage and passes them to temporary storage each time application starts. 

@@ -19,18 +19,21 @@ const barSelector = useSelector(state => state.lists.displayBar)       //here i 
 const options = { 
     tabBarStyle:{
         display:barSelector, 
-        height:Dimensions.get('window').height/100*7,
+        height:Dimensions.get('window').height/100*6,
         backgroundColor: colors.bg400,
         margin:0,
-        padding:0        
+        padding:0,        
     },
     tabBarItemStyle:{
         backgroundColor: colors.bg400,
-        innerheight:'100%'
+        innerHeight:'100%',
+        justifyContent:'flex-start',
     },
     tabBarAndroidRipple:{
          borderless: true ,
     },
+    tabBarIndicator:()=>false,
+    navigationBarColor:colors.bg700,
     tabBarIndicatorStyle:{backgroundColor: colors.green},
     tabBarInactiveTintColor: colors.lightSecondary,
     tabBarActiveTintColor: colors.green,   
@@ -38,11 +41,12 @@ const options = {
     
     return(
             <Tab.Navigator 
+                
                 initialRouteName={'Resulting'}
                 backBehavior={'initialRoute'} tabBarPosition='bottom' /*tabBar={TabBar}*/ screenOptions={options}>
 
-                <Tab.Screen name="Resulting" component={Resulting}></Tab.Screen>               
-                <Tab.Screen name="SetList" component={SetList} options={{swipeEnabled:props.swipes}}></Tab.Screen>
+                <Tab.Screen name="Resulting" component={Resulting} options={{title:'Results'}}></Tab.Screen>               
+                <Tab.Screen name="SetList" component={SetList} options={{title:'Configure'}}></Tab.Screen>
                 <Tab.Screen name="Settings" component={Settings} ></Tab.Screen>  
 
             </Tab.Navigator>

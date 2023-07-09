@@ -6,7 +6,7 @@ import { memo } from 'react';
 
 import { colors, radius } from '../../../../globalColors';
 import { SvgUri } from 'react-native-svg';
-
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 export default function Card (props, selectItem:Function, toggleVisible:Function, ){        
 
@@ -82,7 +82,7 @@ const empty = 'empty'
                     delayLongPress={75}
                     onPressOut={()=>console.log('we unmount item')}
                     onLongPress={()=>{
-                    selectItem(props)
+                    selectItem(props)            
                     toggleVisible()
                     
                 }}
