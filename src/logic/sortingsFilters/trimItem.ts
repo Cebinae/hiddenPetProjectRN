@@ -1,3 +1,5 @@
+//leaving only needed fields from response.data.objects.OBJECT
+
 export let trim = (item:object)=>{
     return {
         discount : item['discount'],

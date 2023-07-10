@@ -37,7 +37,7 @@ let currentTitle = state[titleKeys[titleID]]
 
 
 let temp1 = {...currentTitle}
-console.log(currentTitle)
+// console.log(currentTitle)
 
 
      return currentTitle['value']  !==null?   JSON.stringify(currentTitle['value']).replace(/\"/g, "") :''   

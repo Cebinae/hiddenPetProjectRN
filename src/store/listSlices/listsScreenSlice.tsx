@@ -1,16 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listState, firstList, secondList, thirdList } from "./ListsState";
-
  
-
-
 const initialState = {
-    displayBar: 'flex',
-    firstList:{
-        titles:{
-            firstTitle:'',
-        }
-    }
+    displayBar: 'flex'
 };
 
 export const listsSlice = createSlice({
@@ -19,9 +10,7 @@ export const listsSlice = createSlice({
     reducers:{
         setTabbar: (state, action)=>{
             state.displayBar= action.payload
-        },
-        
-
+        }
     }
 })
 

@@ -1,0 +1,51 @@
+import { colors, radius } from "../../../../../globalColors"
+
+export const styles={
+    container:{
+        backgroundColor:colors.bg700,
+        borderRadius:radius.big,
+        height:'100%',
+        width:'100%',
+        position:'absolute',
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'flex-start'
+    },
+    label:{
+        fontSize:23,
+        fontFamily:'Roboto-Medium',
+        color:colors.lightPrimary,
+        alignSelf:'center',
+        paddingTop:'10%',
+        height:'30%'
+    },
+    text:{
+        alignSelf:'center',
+        height:'20%',
+        marginTop:'10%',
+        width:'80%',
+        color:colors.lightSecondary,
+        fontFamily:'Roboto-Regular',
+        overflow:'visible'    
+    },
+    image:{
+        width:'100%',
+        height:'100%',
+        position:'absolute',
+        bottom:0,
+        right:0,
+        margin:0,
+        padding:0
+        
+    },
+    imageWrapper:{
+        width:'30%',
+        height:'40%',
+        flex:1,
+        position:'absolute',
+        bottom:0,
+        right:0,
+        borderBottomRightRadius:radius.big,
+        overflow:'hidden'
+        }
+}

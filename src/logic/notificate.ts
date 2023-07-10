@@ -2,19 +2,32 @@ import notifee, { AndroidGroupAlertBehavior } from '@notifee/react-native';
 import { beautifyPrice } from '../screens/tabScreens/results/card/cardData';
 
 
-export async function onDisplayNotification(options) {
-    // Request permissions (required for iOS)
-    await notifee.requestPermission()
+// export async function onDisplayNotification(options) {
+//     // Request permissions (required for iOS)
+//     await notifee.requestPermission()
 
-    // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
+//     // Create a channel (required for Android)
+//     const channelId = await notifee.createChannel({
+//       id: 'default',
+//       name: 'Default Channel',
+//     });
+
+//     // Display a notification
+//     await notifee.displayNotification(options)
+// }
+
+
+
+
+export const initNotifications = async()=>{
+  await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
     });
+  await notifee.requestPermission();    
+  }
 
-    // Display a notification
-    await notifee.displayNotification(options)
-}
+
 
 export let createOptions=(title:string, item:object ):object=>{
 

@@ -23,7 +23,7 @@ let pool = ()=>{
     return pool
 }
 
-console.log(pool)
+// console.log(pool)
 // export let duplicatesFree = (title:string):boolean=>{
 // console.log(pool)
 
@@ -38,7 +38,7 @@ console.log(pool)
 export let duplicatesFree = (title:string):boolean=>{
     let deepCopy:Array<string> = Object.assign(pool())
 
-    console.log(deepCopy)
+    // console.log(deepCopy)
   let filtered = deepCopy.filter((savedTitle:any)=>{
         if(savedTitle===title.toUpperCase()){
             return true

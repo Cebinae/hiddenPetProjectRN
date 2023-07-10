@@ -1,12 +1,7 @@
 import * as React from 'react'
-import { View, Text, Button, Pressable  } from "react-native"
-import globalColors, { colors, radius } from "../../../../globalColors";
+import { Pressable  } from "react-native"
 import { StatusBar } from "react-native";
-import { useSelector } from 'react-redux';
-import FastImage from 'react-native-fast-image';
 import UnsuccessCard from './unsuccesCard';
-import store from '../../../store/store';
-import InfoSection from './modalSection';
 import SuccessCard from './successCard';
 
 

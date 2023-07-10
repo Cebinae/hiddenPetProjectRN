@@ -1,5 +1,5 @@
-import store from "../store/store"
-import { setDisplayable } from "../store/resultingSlice"
+import store from "../../../store/store"
+import { setDisplayable } from "../../../store/resultingSlice"
 
 export let toDisplayablePool = (payload:Array<object>)=>{
     if (payload.length>0){

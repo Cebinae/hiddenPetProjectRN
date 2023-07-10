@@ -61,7 +61,7 @@ const validate = (Text:string)=>{
 
 
 
-console.log('duplicates', duplicatesFree(Text))
+// console.log('duplicates', duplicatesFree(Text))
 
     if ((validItems.some((elem)=> elem.toString().toUpperCase().trim() === Text.trim())&&(duplicatesFree(Text.trim()))))
 

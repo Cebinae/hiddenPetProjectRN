@@ -1,4 +1,4 @@
-import { createLocalPool } from "./parts";
+import { createLocalPool } from "./serviceUtils/parts";
 import  BackgroundService  from 'react-native-background-actions';
 import { iterationLoop } from "./main";
 
@@ -14,11 +14,11 @@ export const options = {
         type: 'mipmap',
     },
     color: '#ff00ff',
-    linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
     parameters: {
         delay: 3000,
     },
   };
+  
 export const testingIntensiveTask = async (taskDataArguments?:object) => {
     await new Promise( async (resolve) => {
         let localPool = createLocalPool()

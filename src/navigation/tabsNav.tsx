@@ -13,12 +13,12 @@ export default function TestingMain (props:{
 }){
 
 const Tab = createMaterialTopTabNavigator();
-const barSelector = useSelector(state => state.lists.displayBar)       //here i change display style (flex/none) by listsReducer //ok, bad decision, lags
+const navbarVisible = useSelector(state => state.lists.displayBar)       //here i change display style (flex/none) by listsReducer //ok, bad decision, lags
                                                                         //nvm, its ok at prod
  
 const options = { 
     tabBarStyle:{
-        display:barSelector, 
+        display:navbarVisible, 
         height:Dimensions.get('window').height/100*6,
         backgroundColor: colors.bg400,
         margin:0,
@@ -43,7 +43,7 @@ const options = {
             <Tab.Navigator 
                 
                 initialRouteName={'Resulting'}
-                backBehavior={'initialRoute'} tabBarPosition='bottom' /*tabBar={TabBar}*/ screenOptions={options}>
+                backBehavior={'initialRoute'} tabBarPosition='bottom' screenOptions={options}>
 
                 <Tab.Screen name="Resulting" component={Resulting} options={{title:'Results'}}></Tab.Screen>               
                 <Tab.Screen name="SetList" component={SetList} options={{title:'Configure'}}></Tab.Screen>

@@ -2,11 +2,10 @@ import { View, Text} from "react-native"
 import * as React from 'react'
 import CardSection from "./cardField";
 import store from "../../../../store/store";
-import { colors, radius } from "../../../../../globalColors";
 import { beautifyPrice } from "../../results/card/cardData";
 import { useSelector } from "react-redux";
 import { getResponse } from "../../../../logic/createRequest";
-
+import { styles } from "./stylesUsercard";
 
 
 export default function UserCard (isSuccessful:boolean){
@@ -37,22 +36,7 @@ export default function UserCard (isSuccessful:boolean){
     })
 
 
- let styles = {
-    cardWrapper:{
-        position:'absolute',
-        backgroundColor:colors.bg700,
-        width:'100%',
-        height:'100%',
-        alignItems:'center',
-        borderRadius:radius.big,                  
-        },
-    balance:{
-        alignSelf:'flex-start',
-        marginLeft:'5%',
-        fontSize:20,
-        color:colors.lightPrimary
-    }
- }
+
 
 
 

@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity} from 'react-native'
 import * as React from 'react'
 import BackgroundService from 'react-native-background-actions';
-import { testingIntensiveTask, options} from '../../../logic/service';
+import { testingIntensiveTask, options} from '../../../logic/bgService/service';
 import { setIsRunning } from '../../../store/resultingSlice';
 import { colors } from '../../../../globalColors';
 import store from '../../../store/store';

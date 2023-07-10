@@ -1,102 +1,27 @@
-import { View,StyleSheet, Text, Modal, StatusBar, TextInput, Dimensions, ScrollView , TouchableOpacity, Pressable} from "react-native"
+import { View, Text, Modal, StatusBar, Dimensions, ScrollView , TouchableOpacity} from "react-native"
 import {useState} from "react";
 import * as React from 'react'
 import { useNavigation } from "@react-navigation/native";
 import { StackActions } from "@react-navigation/native";
-import  notifee  from '@notifee/react-native';
-import {resumeWithKeys,} from "./authorizate";
+import {resumeWithKeys} from "./verifyKeys";
 import { colors, radius } from "../../../globalColors";
 import AuthModal from "./modals/authModal";
-import KeyInputSection from "./inputSection";
+import KeyInputSection from "./inputSection/inputSection";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
-
-let init = async()=>{
-    await notifee.createChannel({
-        id: 'default',
-        name: 'Default Channel',
-      });
-      await notifee.requestPermission();    
-}
-init()
+import { initNotifications } from "../../logic/notificate";
+import { styles } from "./stylesAuth";
 
 
 
+initNotifications()
 export default function Auth(){
-const formWight = Dimensions.get('window').width/100*80
-const formHeight = Dimensions.get('window').height/100*33
-const navigation = useNavigation()
 
+    const navigation = useNavigation()
 
-const deviceWidth = Dimensions.get("window").width;
-const deviceHeight = Dimensions.get("window").height;
+    const deviceWidth = Dimensions.get("window").width;
+    const deviceHeight = Dimensions.get("window").height;
 
-React.useEffect(()=>changeNavigationBarColor(colors.bg1000))
-
-const styles = StyleSheet.create(
-    {
-        background: {
-            display: "flex",
-            flexDirection: "row",
-            // justifyContent: 'center',
-            // alignItems: 'center',
-            flex: 1,
-            width: '100%',
-            backgroundColor:colors.bg1000,
-            alignContent:'center'
-            },
-        
-        form: {
-            borderRadius:radius.big,
-            backgroundColor: colors.bg700,
-            height: formHeight,
-            width: formWight,
-            alignSelf:'center',   
-            display:'flex',
-            flexDirection:'column',
-            justifyContent:'space-evenly',
-            alignItems:'center',
-            shadowColor: "#54ef8e",
-
-            shadowOffset: {
-                 width: 0,
-                 height: 10,
-                    },
-                shadowOpacity:  0.23,
-                shadowRadius: 11.27,
-                elevation: 14     
-        },
-        buttonWrapper:{
-            backgroundColor:colors.green,
-            height:'15%',
-            width:'35%',
-            borderRadius:radius.tiny,
-            display:'flex',
-            flexDirection:'column',
-            justifyContent:'center',
-            alignItems:'center'
-        },
-        buttonText:{
-            fontSize:18,
-            color:colors.lightPrimary
-        },
-        secondaryButton:{
-            alignSelf:'center',
-            top:'6%',
-            color:colors.lightSecondary
-        },
-        secondaryButtonText:{
-            fontSize:18,
-            color:colors.lightSecondary
-        },
-        scrollView:{
-            display:'flex', flex:1, flexDirection:'column', justifyContent:'center', 
-        }
-
-
-    }
-)
-
-
+    React.useEffect(()=>changeNavigationBarColor(colors.bg1000))
 
     let [privateKey, setPrivateKey] = useState('')
     let [publicKey, setPublicKey] = useState('')
@@ -113,20 +38,11 @@ const styles = StyleSheet.create(
     let toggleSuccess = (status:boolean)=> setSuccessful(status)
     let toggleModal = (state:boolean)=> setModalVisible(state)
 
-    // 
+    const navigateToTabs = ()=>{navigation.dispatch(StackActions.replace('main')) }
 
-
-let navigateToTabs = ()=>{
-    // navigation.navigate('main' )
-    navigation.dispatch(
-        StackActions.replace('main')
-    ) 
-}
-
-let continueLogged = async()=>{
-    privateIsValid&&publicIsValid? resumeWithKeys(publicKey, privateKey, toggleModal, navigateToTabs, setSuccessful):null   
-}
-
+    const continueLogged = async()=>{
+        privateIsValid&&publicIsValid? resumeWithKeys(publicKey, privateKey, toggleModal, navigateToTabs, setSuccessful):null   
+    }
 
     return(
 

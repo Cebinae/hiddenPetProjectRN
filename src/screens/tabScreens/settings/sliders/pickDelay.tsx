@@ -3,52 +3,15 @@ import * as React from 'react'
 import { View , Text} from 'react-native';
 import store from '../../../../store/store';
 import { setDelay } from '../../../../store/settingsSlice';
-import { colors, radius } from '../../../../../globalColors';
+import { colors } from '../../../../../globalColors';
 import SwitchSelector from "react-native-switch-selector";
-
+import { styles } from './stylesDelay';
 
 export default function Delay(props:{
     initialDelay:number, options:Array<Object>
 }) {
 
 
-let styles = {
-    wrapper:{
-        marginTop:'3%',
-        width:'95%',
-        height:'45%',
-        backgroundColor: colors.bg700,
-        alignSelf:'center',
-        borderRadius:radius.big,
-        display:'flex', 
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    textSection:{
-        width:'50%',
-        marginLeft:'5%'
-    },
-    primaryText:{
-        fontSize:16,
-
-    },
-    secondaryText:{
-        fontSize:12,
-        color: colors.lightSecondary,
-        marginLeft:0,
-        // fontFamily:'Roboto-Regular'
-
-    },
-    switch:{
-        marginRight:'5%',
-        padding:0,
-        width:'39%',
-        height:'100%',
-        alignItems:'center',
-        justifyContent:"center",
-    }
-}
 
 const dispatchToSettings = (value:number):void=>{
     store.dispatch(setDelay(value))

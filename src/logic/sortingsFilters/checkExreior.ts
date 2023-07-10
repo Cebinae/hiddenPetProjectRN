@@ -8,7 +8,7 @@ export let exampleItem= {
 // if exterior match any of valid exteriors...   
 
 
-export let acceptableExteriors = (state: object): Array<string>=>{
+const acceptableExteriors = (state: object): Array<string>=>{
 
     let safeState = Object.freeze(state)
 
@@ -24,7 +24,7 @@ export let acceptableExteriors = (state: object): Array<string>=>{
 }
 
 
-export let isMatchAny =(item: object, acceptableValues: Array<string>):boolean=>{
+const isMatchAny =(item: object, acceptableValues: Array<string>):boolean=>{
     let doesMatch = false
     let setFound = ()=> doesMatch=true
     acceptableValues.forEach((exterior)=>{
@@ -34,10 +34,9 @@ export let isMatchAny =(item: object, acceptableValues: Array<string>):boolean=>
 }
 
 
-let checkExterior = (item:object, state:object): boolean=>{
-   let res =  isMatchAny(item, acceptableExteriors(state))
-//    console.log('EXTERIORS IS ', res)
-   return res
+const checkExterior = (item:object, state:object): boolean=>{
+   return isMatchAny(item, acceptableExteriors(state))?true:false
+   
 }
 
 

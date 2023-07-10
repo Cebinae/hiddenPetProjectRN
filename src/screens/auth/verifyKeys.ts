@@ -1,7 +1,7 @@
 import * as Keychain from 'react-native-keychain';
 import store from '../../store/store';
 import { setAccountData } from '../../store/settingsSlice';
-import { sleep } from '../../logic/parts';
+import { sleep } from '../../logic/bgService/serviceUtils/parts';
 import { setIsLogged } from '../../store/settingsSlice';
 import { getResponse } from '../../logic/createRequest';
 import { setPrivateKey, setPublicKey } from '../../store/keysSlice';
@@ -13,7 +13,7 @@ const setKeys = (publicKey:string, privateKey:string):void=>{
   store.dispatch(setPrivateKey(privateKey))
 }
 
-let setCredentials = async (publicKey:string, secretKey:string)=>{
+const setCredentials = async (publicKey:string, secretKey:string)=>{
   console.log('into credentials')
   await Keychain.setGenericPassword('keys', JSON.stringify({
     publicKey:publicKey,
@@ -22,12 +22,12 @@ let setCredentials = async (publicKey:string, secretKey:string)=>{
 
 }
 
-let dispatchProfileInfo=(data:object)=>{
+const dispatchProfileInfo=(data:object)=>{
   console.log('into dispatch')
   store.dispatch(setAccountData(data))
 }
 
-let getStatus = async(publicKey:string, secretKey:string, setSuccess:any): Promise<Boolean>=>{
+const getStatus = async(publicKey:string, secretKey:string, setSuccess:any): Promise<Boolean>=>{
   console.log('into status')
   let response =  await getResponse(
                                 publicKey,

@@ -1,5 +1,5 @@
 import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
-import { listState, firstList, secondList, thirdList } from "../ListsState";
+import { listState, firstList, secondList, thirdList } from "../stateTypes";
 import { commonReducers } from "../commonReducers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

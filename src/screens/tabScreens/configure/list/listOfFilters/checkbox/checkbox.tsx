@@ -33,11 +33,11 @@ let isChecked=():void=>{
     
 
 
-    console.log('ref is ' + temp2)
+    // console.log('ref is ' + temp2)
     isFisrtRender.current++
     setIsChecked(temp2 )
     
-    console.log('rendered box '+ isFisrtRender.current)
+    // console.log('rendered box '+ isFisrtRender.current)
 
 
     forceUpdate()

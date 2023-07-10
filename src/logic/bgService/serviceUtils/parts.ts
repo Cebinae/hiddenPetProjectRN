@@ -1,6 +1,6 @@
-import { store } from "../store/store";
-import { getResponse } from "./createRequest";
-import { setDisplayable } from "../store/resultingSlice";
+import { store } from "../../../store/store";
+import { getResponse } from "../../createRequest";
+import { setDisplayable } from "../../../store/resultingSlice";
 
 
 
@@ -10,7 +10,6 @@ export let defineState = (section: number): object => {
     2: store.getState().SecondPersistedSection,
     3: store.getState().ThirdPersistedSection,
   };
-
   // console.log(state[section])
   return state[section];
 };
@@ -58,7 +57,6 @@ export const sleep = (time: number) => new Promise((resolve) => setTimeout(() =>
 
 
 export let createLocalPool = ():object=>{
-
   let dataPool = {}
 
   let allTitles:Array<string> = [...pickTitles(defineState(1)), ...pickTitles(defineState(2)), ...pickTitles(defineState(3))]

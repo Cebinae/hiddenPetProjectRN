@@ -47,6 +47,7 @@ eslintrc.js
 TODOLIST.md
 .watchmanconfig
 my-key.keystore
+responseExamples.ts
 
 # fastlane
 #

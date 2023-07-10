@@ -65,9 +65,7 @@ export default function UnsuccessCard(){
             </View>
 
             <View style={styles.pepeWrapper}>
-                <FastImage source={{
-                        uri:'https://iili.io/HPr20rB.png'
-                    }}
+                <FastImage source={require('../../../assets/pepeUnsuccess.png')}
                     style={styles.pepeImage}
                     resizeMode={FastImage.resizeMode.stretch}
 

@@ -60,38 +60,6 @@ let doCheck = (stickerNames:Array<string>, years:Array<string>): boolean=>{
 
 
 
-let ccheck = (item, years): boolean=>{
-
-    let fulfilled = false
-    let setFulfilled = ()=>{
-        fulfilled=true
-        // console.log('fulfilled')
-    }
-    let stickerNames: Array<string>= item.extra.stickers.map((obj)=>obj.name)
-
-    for (let i = 0; i<stickerNames.length&&!fulfilled; i++){
-        
-        // stickerNames[i]
-
-        years.forEach((year)=>{
-            stickerNames[i].includes(year)?setFulfilled(): console.log('skipped')
-        })
-
-    }
-    console.log('CURRENT RESULT IS' +fulfilled)
-    return fulfilled
-
-
-    // here we check if any valid year is typed inside the name of any sticker title 
-}
-
-
-
-
-
-
-
-
 
 let  checkForStickers = (item:object, state:object):boolean=>{
 
@@ -112,22 +80,6 @@ let  checkForStickers = (item:object, state:object):boolean=>{
     
     
 }
-
-
-
-
-
-
-
-
-
-
-// let initCheck = (item, state):boolean=>{
-    
-//     let years = createAcceptableSubstrings(state.minStickerYear, state.maxStickerYear)
-
-//     return check()
-// }
 
 
 
@@ -152,7 +104,6 @@ let customCheck = (item, years)=>{
 
 
 
-
 export let newFunc = (item:object, state:object):boolean=>{
 
     let result = false
@@ -172,22 +123,8 @@ export let newFunc = (item:object, state:object):boolean=>{
 
     // console.log('STICKERS is' + result)
     return result
-
-    
-
-
-
-
     // ypaaaaaa. works as expected
 }
-
-
-
-
-
-
-
-
 
 
 export default checkForStickers

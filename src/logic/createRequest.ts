@@ -9,13 +9,12 @@ const defaultPtivateKey = "7adee52c88b8392d86f1110e13172584cda92a5c7ec8d49ad44f2
 const host = 'api.dmarket.com';
 
 
-
-export async function getResponse(
+export const getResponse=async(
                                     pubKey?:string, 
                                     secKey?:string, 
                                     path?:string,
                                     options?:object, 
-                                    errorLocation?:string) {
+                                    errorLocation?:string)=> {
 
     const method = "GET";
     const apiUrlPath = path? path:"/account/v1/user";
