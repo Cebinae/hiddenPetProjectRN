@@ -1,0 +1,9 @@
+{
+    "asyncStorage":{
+        "firstList": "validated list state from listSlice to use for requests and display as placeholder",
+        "secondList":  "validated list state from listSlice to use for requests and display as placeholder",
+        "thirdList":  "validated list state from listSlice to use for requests and display as placeholder"
+
+
+    }
+}
