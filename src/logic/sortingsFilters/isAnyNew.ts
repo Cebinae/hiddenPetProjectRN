@@ -1,7 +1,3 @@
-import { array } from "prop-types"
-
-
-
 
 export let pickOnlyNew = (savedArr: Array<object>, currentArr:Array<object>)=>{
 

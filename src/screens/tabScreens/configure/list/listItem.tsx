@@ -14,8 +14,8 @@ export default function ListOfFilters(){
         listWrapper:{
             backgroundColor: colors.bg400,
             width:'96%', // не проебись с суммой ширины
-            marginHorizontal:'1%',
-            height: Dimensions.get('window').height/100*28.3,
+            marginHorizontal:'2%',
+            height: Dimensions.get('window').height/100*28.2773,
             // marginVertical:'1%',
             display:'flex',
             flexDirection:'row',

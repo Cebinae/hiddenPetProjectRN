@@ -4,7 +4,7 @@ import { Switch } from 'react-native-switch';
 import ToggleSwitch from 'toggle-switch-react-native'
 import { store } from '../../../../../../store/store';
 import toStorage from './toStorage';
-import ApplyButton from '../applyButton/button';
+import ApplyButton from './button';
 
 
 

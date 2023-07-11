@@ -52,24 +52,26 @@ const innerIteration= async (sectionID: number, counter:number, localPool:object
 
           console.log('PASSED')
           let prevArray = Object.assign(localPool[title])
-    console.log('prev pool lenght', prevArray.lenght)
+    console.log('prev pool lenght', prevArray.length)
 
           
           localPool[title] = [...newPool]
-    console.log('saved to pool', localPool[title].lenght)
+    console.log('saved to pool', localPool[title].length)
 
           let found = async ()=>{
-            console.log('comparing old of',prevArray.length+' and new of'+ newPool.length )
-          
-            let onlyNewItems = pickOnlyNew(prevArray, newPool )
-            counter>0? toDisplayablePool(onlyNewItems):null //here we save new found items
-            onlyNewItems.length>0? async()=>await notifee.displayNotification(createSummary(title, onlyNewItems.length)):null
+                    console.log('comparing old of',prevArray.length+' and new of'+ newPool.length )
+                  
+                    let onlyNewItems = pickOnlyNew(prevArray, newPool )
+                    counter>0? toDisplayablePool(onlyNewItems):null //here we save new found items
+                    onlyNewItems.length>0? await decideNotification(onlyNewItems, title):null
 
-            // onlyNewItems.forEach(async(newItem)=>{
-            //   await notifee.displayNotification(createOptions(title, newItem))            // notifications
-            // })
-            decideNotification(onlyNewItems, title)
-            console.log('found new titles = '+ onlyNewItems.length)}
+                    // onlyNewItems.forEach(async(newItem)=>{
+                    //   await notifee.displayNotification(createOptions(title, newItem))            // notifications
+                    // })
+                    console.log(`new items now are`, onlyNewItems)
+                    
+                    console.log('found new titles = '+ onlyNewItems.length)
+          }
 
             console.log('break after new items')
     await sleep(basicDelay/4)

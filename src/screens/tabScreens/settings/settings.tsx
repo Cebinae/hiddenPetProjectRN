@@ -10,9 +10,17 @@ import { useNavigation } from "@react-navigation/native";
 import store from "../../../store/store";
 import { logOut } from "./logOut";
 import { colors, radius } from "../../../../globalColors"; 
-
+import changeNavigationBarColor from "react-native-navigation-bar-color";
 
 export default function Settings(){
+
+    let navigation = useNavigation()
+    React.useEffect(()=>{
+        // console.log('render')
+        navigation.addListener('focus', ()=>changeNavigationBarColor(colors.bg400))
+    }, [])
+
+
     const options = [
         { label: "00:02", value: 2000 },
         { label: "00:04", value: 4000 },
@@ -33,7 +41,6 @@ export default function Settings(){
     let initialDelay = decideInitial(options)
 
 
-    let navigation = useNavigation()
     const navigateToAuth = ()=>navigation.navigate('auth') 
     let isLogged = useSelector((state)=>state.settings.isLogged)
 
@@ -49,7 +56,7 @@ const styles= {
         },
     container:{
         backgroundColor:colors.bg400,
-        height:'92.22%',
+        height:'92.4%',
         width:'96%',
         borderRadius:radius.regular,
         display:'flex',
@@ -57,7 +64,7 @@ const styles= {
         justifyContent:'flex-start',
         alignItems:'center',
         gap:12,
-        marginTop:'2.4%'
+        marginTop:Dimensions.get('window').height/100*1
 
         },
     cardWrapper:{
