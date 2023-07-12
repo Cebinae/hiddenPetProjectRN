@@ -3,81 +3,65 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { sectionContext } from '../../setLists'
 import { titleContext } from './setTitles'
 import store from '../../../../../store/store'
-import firstListSlice from '../../../../../store/listSlices/listsTempState/firstListSlice'
 import { colors, radius } from '../../../../../../globalColors'
 
 
-export default function ClearBtn(updateFnc, placeholderRef) {
-
-    console.log('in props we have', placeholderRef)
-
-    
+export default function ClearBtn(props:{
+    updateFnc, placeholderRef, clearFnc
+}) {
 
     let styles = {
         parent:{
-            backgroundColor:colors.red,
+            backgroundColor:colors.darkOrange,
             width:'22%',
             height:'80%',
             marginLeft:3,
             position:'absolute',
             right:'-10%',
-            // top:'-60%',
             elevation:9999,
-            borderRadius:radius.tiny
-            
+            borderRadius:radius.tiny       
         },
         text:{
             color:colors.lightPrimary
         }
-
-
     }
 
 let sectionID = React.useContext(sectionContext)    
 let titleID = React.useContext(titleContext)
 
-let clearThisInput=()=>{
-
-   
-
-    let strings = {
+const clearThisInput=()=>{
+    const strings = {
         1:'First',
         2:'Second',
         3:'Third',
         4:'Fourth',
         5:'Fifth'
     }
-
-    let persisted = {
+    const persisted = {
         1:'FirstPersistedSection',
         2:'SecondPersistedSection',
         3:'ThirdPersistedSection'
     }
 
-
-
-
-let clearTemp = {
-        type:`${strings[sectionID]}List/set${strings[titleID]}Title`,
+    let actionClearTemp = {
+            type:`${strings[sectionID]}List/set${strings[titleID]}Title`,
+            payload:{
+                value:null,
+                isValid:'empty'
+            }}           
+    let actionClearPersisted = {
+        type:`${persisted[sectionID]}/set${strings[titleID]}Title`,
         payload:{
             value:null,
             isValid:'empty'
- 
-
         }}
-let clearPersisted = {
-    type:`${persisted[sectionID]}/set${strings[titleID]}Title`,
-    payload:{
-        value:null,
-        isValid:'empty'
 
-
-    }}
-
-store.dispatch(clearTemp)
-store.dispatch(clearPersisted)
-placeholderRef=1
-updateFnc.updateFnc()
+    store.dispatch(actionClearTemp)
+    store.dispatch(actionClearPersisted)
+    props.placeholderRef=1
+    props.clearFnc()
+    props.updateFnc()
+    
 }
 
 return (

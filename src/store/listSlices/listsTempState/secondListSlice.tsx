@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { listState, firstList, secondList, thirdList } from "../stateTypes";
+import { listState, firstList, secondList, thirdList } from "../commonState";
 import { commonReducers } from "../commonReducers";
  
 

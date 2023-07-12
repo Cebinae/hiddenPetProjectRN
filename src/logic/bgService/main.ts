@@ -4,21 +4,21 @@ defineState,
 sleep,
 fetchTitle } from "./serviceUtils/parts";
 
-import { createSummary, decideNotification } from "../notificate";
+import {  decideNotification } from "../notificate";
 import { immutableFilter } from "./serviceUtils/immutableFilter";
 import { store } from "../../store/store";
-import { pickOnlyNew } from "../sortingsFilters/isAnyNew";
-import  notifee  from '@notifee/react-native';
+import { compareArrays } from "../sortingsFilters/compareArrays";
 import { pricesBubbleSort } from "../sortingsFilters/initialSort";
 import { toDisplayablePool } from "./serviceUtils/updateResults";
 import { trim } from "../sortingsFilters/trimItem";
+import  BackgroundService  from 'react-native-background-actions';
 
 
-
+                                //TODO: idk, maybe decompose it even more? main body of service logic
 const innerIteration= async (sectionID: number, counter:number, localPool:object) => {
 
-  const basicDelay:number = store.getState().settings.basicDelay  //split calculations for smooth UI
-  const shouldDisplayOld:boolean = store.getState().settings.displayAlreadyPresent
+  const basicDelay:number = store.getState().settings.basicDelay    //split calculations for smooth UI
+  let shouldDisplayOld:boolean = store.getState().settings.displayAlreadyPresent
 
   console.log('NUMBER OF OUTER ITERATION IS', counter)
   console.log("iteration fired on section" + sectionID);
@@ -26,68 +26,57 @@ const innerIteration= async (sectionID: number, counter:number, localPool:object
   const titles = pickTitles(state);
   console.log("with following titles: " + titles);
 
-      let iterate = async () => {
+    let iterate = async () => {
 
         //loop because we do it for every single title from section
         for (let i = 0; i < titles.length; i++) {
-          const title: string = titles[i]
+              const title: string = titles[i]
+              let data = await fetchTitle(title)                    //here we fetch title[i] from list
+                // console.log('fetched', data.length, ' items')
 
-          let data = await fetchTitle(title)  //here we fetch title from list
-            console.log('fetched', data.length, ' items')
+              await sleep(basicDelay/4)
+              let trimmed = data.map((element:object) => {                   //trim response obejcts
+                return trim(element)
+              });
+              
+                // console.log('left after trimming', trimmed.length)
 
-          
-          await sleep(basicDelay/4)
-          let trimmed = data.map(element => {
-            return trim(element)
-          });
-            console.log('left after trimming', trimmed.length)
+              await sleep(basicDelay/4)     
+              let newPool = immutableFilter(trimmed, state)         //here we pick only items that passed filters
+              // console.log('left after filters: ', newPool.length)
 
-          await sleep(basicDelay/4)     
-          let newPool = immutableFilter(trimmed ,state )  //rhere we save only filtered items
-          console.log('left after filters: ', newPool.length)
+              await sleep(basicDelay/4)
+              pricesBubbleSort(newPool)                             // just sort from cheap to expensive
 
-          await sleep(basicDelay/4)
-          pricesBubbleSort(newPool) // just sort from cheap to expensive
-          shouldDisplayOld&&counter===0? toDisplayablePool(newPool): console.log('FIRST RESULTS DIDNT SAVE')
+              shouldDisplayOld&&counter===0&&await BackgroundService.isRunning()? toDisplayablePool(newPool): console.log('FIRST RESULTS DIDNT SAVE')
+                                                                   //accordind to settings display 1st results or not
+              // console.log('PASSED')
+              let prevArray = Object.assign(localPool[title])        //firstly we save previous items  !!!                                                                    
+              // console.log('prev pool lenght', prevArray.length)        
+              localPool[title] = [...newPool]                          //and only then override service temp pool !!!
+              // console.log('saved to pool', localPool[title].length)
+              let found = async ()=>{
+                        // console.log('comparing old of',prevArray.length+' and new of'+ newPool.length )                    
+                        let onlyNewItems = compareArrays(prevArray, newPool )   //get rid of items that were before
+                        counter>0? toDisplayablePool(onlyNewItems):null       //here we passs items that passed filters&&new
+                        onlyNewItems.length>0? await decideNotification(onlyNewItems, title):null                
+                        // console.log('found new titles = '+ onlyNewItems.length)
+              }
 
-          console.log('PASSED')
-          let prevArray = Object.assign(localPool[title])
-    console.log('prev pool lenght', prevArray.length)
+              // console.log('break after new items')
+              await sleep(basicDelay/4)
 
-          
-          localPool[title] = [...newPool]
-    console.log('saved to pool', localPool[title].length)
-
-          let found = async ()=>{
-                    console.log('comparing old of',prevArray.length+' and new of'+ newPool.length )
-                  
-                    let onlyNewItems = pickOnlyNew(prevArray, newPool )
-                    counter>0? toDisplayablePool(onlyNewItems):null //here we save new found items
-                    onlyNewItems.length>0? await decideNotification(onlyNewItems, title):null
-
-                    // onlyNewItems.forEach(async(newItem)=>{
-                    //   await notifee.displayNotification(createOptions(title, newItem))            // notifications
-                    // })
-                    console.log(`new items now are`, onlyNewItems)
-                    
-                    console.log('found new titles = '+ onlyNewItems.length)
-          }
-
-            console.log('break after new items')
-    await sleep(basicDelay/4)
-
-          //shoud i save. compare with prev and save.
-          counter!=0? found(): console.log('nothing to compare with, its first iteration...')
-          //works as expected
+              counter!=0? found(): console.log('nothing to compare with, its first iteration...')
+                                                            //if not first loop, fire FNC of comparing with previous response
+              //works as expected
         }
         
         //outside the loop
       }
- await iterate().catch((e)=>{
-        console.error(e)
-        console.log('its broken in iteration through section, otside the loop')
-      })
-//  await sleep(2) // this sleep is to make a break before next section
+  await iterate().catch((e)=>{
+          console.error(e)
+          console.log('its broken in iteration through section, otside the loop')
+        })
 };
 
 

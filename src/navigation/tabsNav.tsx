@@ -40,11 +40,10 @@ const options = {
 }
     
     return(
-            <Tab.Navigator 
-                
+            <Tab.Navigator                
                 initialRouteName={'Resulting'}
-                backBehavior={'initialRoute'} tabBarPosition='bottom' screenOptions={options}>
-
+                backBehavior={'initialRoute'} tabBarPosition='bottom' screenOptions={options}
+            >
                 <Tab.Screen name="Resulting" component={Resulting} options={{title:'Results'}}></Tab.Screen>               
                 <Tab.Screen name="SetList" component={SetList} options={{title:'Configure'}}></Tab.Screen>
                 <Tab.Screen name="Settings" component={Settings} ></Tab.Screen>  

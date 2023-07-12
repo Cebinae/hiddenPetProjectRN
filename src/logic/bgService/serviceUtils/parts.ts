@@ -4,7 +4,7 @@ import { setDisplayable } from "../../../store/resultingSlice";
 
 
 
-export let defineState = (section: number): object => {
+export let defineState = (section: number): object => {   //to use in other utils
   let state = {
     1: store.getState().FirstPersistedSection,
     2: store.getState().SecondPersistedSection,
@@ -14,7 +14,7 @@ export let defineState = (section: number): object => {
   return state[section];
 };
 
-export let pickTitles = (state: object): Array<string> => {
+export let pickTitles = (state: object): Array<string> => {     //return all selected titles as array
   let results: Array<string> = [];
 
   let titles = [
@@ -24,14 +24,13 @@ export let pickTitles = (state: object): Array<string> => {
     state.fourth,
     state.fifth,
   ];
-  let getReadyTitles = titles.forEach((title) => {
+  titles.forEach((title) => {
     title.value ? results.push(title.value) : null;
   });
-
   return results;
 };
 
-export let pickFilters = (state: object): Array<boolean | number> => {
+export let pickFilters = (state: object): Array<boolean | number> => { //same for filters
   return [
     state.minStickerYear,
     state.maxStickerYear,
@@ -44,7 +43,7 @@ export let pickFilters = (state: object): Array<boolean | number> => {
   ];
 };
 
-export let fetchTitle = async( title:string)=>{
+export let fetchTitle = async( title:string)=>{              //obviously, getting array with response objects
   const options = {
     Title:title,
     Limit:10000
@@ -53,10 +52,9 @@ export let fetchTitle = async( title:string)=>{
   return resp.data.objects
 }
 
-export const sleep = (time: number) => new Promise((resolve) => setTimeout(() => resolve(), time));
+export const sleep = (time: number) => new Promise((resolve) => setTimeout(() => resolve(), time)); //for delay
 
-
-export let createLocalPool = ():object=>{
+export let createLocalPool = ():object=>{     //temprorary pool to avoid redux, define at top of bg service
   let dataPool = {}
 
   let allTitles:Array<string> = [...pickTitles(defineState(1)), ...pickTitles(defineState(2)), ...pickTitles(defineState(3))]
@@ -69,10 +67,3 @@ export let createLocalPool = ():object=>{
   return dataPool
   }
 
-export let toDisplayablePool = (payload:Array<object>)=>{
-    if (payload.length>0){
-        let prevValue = store.getState().resulting.displayableItems
-        let valueToBeSet = [...prevValue, ...payload]
-        store.dispatch(setDisplayable(valueToBeSet))
-        }  
-}

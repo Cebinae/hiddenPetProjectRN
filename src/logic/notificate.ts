@@ -5,14 +5,14 @@ import { beautifyPrice } from '../screens/tabScreens/results/card/cardData';
 export const initNotifications = async()=>{
   await notifee.createChannel({
       id: 'default',
-      name: 'Default Channel',
+      name: 'Default Channel',            //to call at launch
     });
   await notifee.requestPermission();    
   }
-//to call at launch
 
 
-export let createOptions=(title:string, item:object ):object=>{
+
+const createOptions=(title:string, item:object ):object=>{
 
   let price:string = beautifyPrice(item.price.USD)
   let stickers = Object.assign(item.extra.stickers)
@@ -34,13 +34,13 @@ export let createOptions=(title:string, item:object ):object=>{
 
 
   
-export let createSummary=(title:string, ammount:number ):object=>{
+const createSummary=(title:string, ammount:number ):object=>{
     return {
       title: `${ammount} new summary ${title}'s`,
       body: `summary`,
       android: {
         channelId: 'default',
-        groupSummary: true,
+        groupSummary: true,                           //if many items at once, needed for grouping
         groupId: `${title}`,
         pressAction: {
           id: 'default',
@@ -54,7 +54,7 @@ export let decideNotification = async(newItems: Array<object>, title: string)=>{
 
     if(newItems.length>1){
       notifee.displayNotification(createSummary(title, newItems.length))
-      for (let i=0; i<=newItems.length; i++){
+      for (let i=0; i<=newItems.length; i++){                                  //main logic of firing notifications
           notifee.displayNotification(createOptions( title, newItems[i]))
       }
     }

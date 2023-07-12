@@ -1,47 +1,20 @@
 import * as React from 'react';
 import { TouchableOpacity, View, Text, TouchableHighlight } from "react-native";
 import { store } from '../../../../../../store/store';
-import { firtstlistSlice, setIsActive } from '../../../../../../store/listSlices/listsTempState/firstListSlice';
-import { useSelector } from 'react-redux';
-import { firstList } from '../../../../../../store/listsSlices/ListsState';
-import firstListSlice from '../../../../../../store/listSlices/listsTempState/firstListSlice';
 import { sectionContext } from '../../../setLists';
 import { useContext } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setFirstValidList } from '../../../../../../store/validLists';
-import { current } from '@reduxjs/toolkit';
+import { setFirstValidList } from '../../../../../../store/validListsSlice';
 import { colors, radius } from '../../../../../../../globalColors';
+import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
+import { FirstPersistedSection } from './../../../../../../store/listSlices/persistedLists/firstSection';
+import { SecondPersistedSection } from './../../../../../../store/listSlices/persistedLists/secondSection';
+import { ThirdPersistedSection } from './../../../../../../store/listSlices/persistedLists/thirdSection';
 
 
 
 
 
-const styles={
-    wrapper:{
-        width:"90%",
-        innerHeight:'100%',
-        // backgroundColor:'red'
-    },
-
-    button:{
-        padding:0,
-        marginTop:'15%',
-        backgroundColor: colors.darkGreen,
-        width:'100%',
-        height:50,
-        borderRadius:radius.big,
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'center',
-        alignItems:'center'
-        
-    },
-    title:{
-        fontSize:15,
-        color:'white',
-
-    }
-}
 
 
 
@@ -120,18 +93,60 @@ const stateToValidSlice = (sectionID: number)=>{
     toPersisted( 2, sectionID)
     toPersisted( 3, sectionID)
     toPersisted( 4, sectionID)
-    toPersisted( 5, sectionID)
-
-            
-
-
+    toPersisted( 5, sectionID)       
 }
 
 
 
 export default function ApplyButton(){
 
-const sectionID = useContext(sectionContext)
+   const sectionID = useContext(sectionContext)
+   let listSelector;
+   let switchList = {
+       1: ()=>listSelector = state => state.firstList,
+       2: ()=>listSelector = state => state.secondList,
+       3: ()=>listSelector = state => state.thirdList
+   }
+   switchList[sectionID]()
+   let currentSection = useSelector(listSelector)
+   
+   let isError:boolean = currentSection.first.isValid==='error'||
+               currentSection.second.isValid==='error'||
+               currentSection.third.isValid==='error'||
+               currentSection.fourth.isValid==='error'||
+               currentSection.fifth.isValid==='error'
+   
+   //    
+
+    let styles={
+        wrapper:{
+            width:"90%",
+            innerHeight:'100%',
+        },
+        button:{
+            padding:0,
+            marginTop:'15%',
+            backgroundColor: !isError? colors.darkGreen: colors.red,
+            width:'100%',
+            height:50,
+            borderRadius:radius.big,
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center'    
+        },
+        title:{
+            fontSize:15,
+            color:'white',
+        }
+    }
+
+
+
+
+
+
+
 
 let handleButton = (contextOfSection: number)=>{
 
@@ -148,15 +163,7 @@ let handleButton = (contextOfSection: number)=>{
 
 }
 
-
-
-
-
-
-
-
-
-
+// isError?`Can't save with wrong titles`:'Save changes'
     return(
         <sectionContext.Consumer>
             {sectionID=> (
@@ -166,7 +173,7 @@ let handleButton = (contextOfSection: number)=>{
                     style={styles.button}
                     onPress={()=> handleButton(sectionID)}
                  >
-                    <Text style={styles.title}>Save changes</Text>
+                    <Text style={styles.title}>{isError?`Can't save with wrong titles`:'Save changes'}</Text>
                 </TouchableOpacity>
             </View>
 
@@ -176,4 +183,44 @@ let handleButton = (contextOfSection: number)=>{
     )
     
 }
+
+
+let persistedlistSelector;
+//     let switchPersistedList = {
+//         1: ()=>persistedlistSelector = state => state.FirstPersistedSection,
+//         2: ()=>persistedlistSelector = state => state.SecondPersistedSection,
+//         3: ()=>persistedlistSelector = state => state.ThirdPersistedSection
+//     }
+//     switchPersistedList[sectionID]()
+//     let currentPersistedSection = useSelector(persistedlistSelector)
+
+//     let currPersistedPoolValues = [
+//         JSON.stringify(currentPersistedSection.first.value),
+//         JSON.stringify(currentPersistedSection.second.value),
+//         JSON.stringify(currentPersistedSection.third.value),
+//         JSON.stringify(currentPersistedSection.fourth.value),
+//         JSON.stringify(currentPersistedSection.fifth.value),
+//     ]                                                                    //блять null єто пустой обьект, куда сравнивать
+
+//     let currPoolValues = [
+//         JSON.stringify(currentSection.first.value),
+//         JSON.stringify(currentSection.second.value),
+//         JSON.stringify(currentSection.third.value),
+//         JSON.stringify(currentSection.fourth.value),
+//         JSON.stringify(currentSection.fifth.value),
+//     ]   
+
+//     let anyChanges:boolean = 
+//                         currPoolValues[0]===currPersistedPoolValues[0]&&
+//                      currPoolValues[1]===currPersistedPoolValues[1]&&
+//                      currPoolValues[2]===currPersistedPoolValues[2]&&
+//                      currPoolValues[3]===currPersistedPoolValues[3]&&
+//                      currPoolValues[4]===currPersistedPoolValues[4]
+               
+               
+               
+//   // ебанутся...             
+               
+// //а хуй, нужно не учитывать уже сохраненные
+
 

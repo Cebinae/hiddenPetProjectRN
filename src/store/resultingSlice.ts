@@ -1,6 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { pricesBubbleSort } from "../logic/sortingsFilters/initialSort";
+import { createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     displayableItems:[],

@@ -5,15 +5,15 @@ import { StatusBar } from "react-native";
 import { styles } from './stylesHeader';
 
 export default function CustomHeader(props:{
-    StatusBarColor: string
+    StatusBarColor: string, name:string
 }){
 
     return(
         <>
-        <StatusBar backgroundColor={colors.bg700} ></StatusBar>
-        <View style={styles.container}>
-            <Text style={styles.label}>{props.name}</Text>
-        </View>
+            <StatusBar backgroundColor={colors.bg700} ></StatusBar>
+            <View style={styles.container}>
+                <Text style={styles.label}>{props.name}</Text>
+            </View>
         </>
     )
 }

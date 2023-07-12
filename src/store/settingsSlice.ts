@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Settings from './../screens/mainScreens/settings/settings';
 
 interface settingsState {
     displayAlreadyPresent: boolean,
@@ -16,9 +15,6 @@ const initialState : settingsState = {
     swipesEnabled:true,
     accountData:null
 }
-
-
-
 
 
 export const settingsSlice = createSlice({

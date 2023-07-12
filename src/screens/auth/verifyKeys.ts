@@ -13,11 +13,11 @@ const setKeys = (publicKey:string, privateKey:string):void=>{
   store.dispatch(setPrivateKey(privateKey))
 }
 
-const setCredentials = async (publicKey:string, secretKey:string)=>{
+const setCredentials = async (publicKey:string, secretKey:string)=>{ 
   console.log('into credentials')
   await Keychain.setGenericPassword('keys', JSON.stringify({
     publicKey:publicKey,
-    secretKey:secretKey
+    secretKey:secretKey            
   })).catch(e=>alert(e))
 
 }
@@ -46,13 +46,6 @@ const getStatus = async(publicKey:string, secretKey:string, setSuccess:any): Pro
   return false
 }
 
-// export const initKeys =async ()=>{
-//   let keys = await Keychain.getGenericPassword()
-//   console.log(keys['privateKey'])
-// }
-
-
-
 
 export let keychainToState = async():Promise<void>=>{
   let credentials = await Keychain.getGenericPassword()
@@ -67,8 +60,6 @@ const onSuccess = async (publicKey:string, secretKey:string, setModalVisible:any
   setSuccess(true)
   // console.log('into success')
   await setCredentials(publicKey, secretKey)
-
-  // console.log('ACCOUNT DATA,', store.getState().settings.accountData)
 
   setModalVisible(true)
   keychainToState()
@@ -95,13 +86,13 @@ export let resumeWithKeys = async(publicKey:string,
                                   setModalVisible:any, 
                                   navigate:any, 
                                   setSuccess:any):Promise<boolean>=>{
-  console.log('into main')
+  // console.log('into main of verifyKeys')
 
-  return await getStatus(publicKey, secretKey, setSuccess)? onSuccess(publicKey, 
-                                                          secretKey, 
-                                                          setModalVisible, 
-                                                          navigate,
-                                                          setSuccess) : onFail(setModalVisible, setSuccess)
+    return await getStatus(publicKey, secretKey, setSuccess)? onSuccess(publicKey, 
+                                                            secretKey, 
+                                                            setModalVisible, 
+                                                            navigate,
+                                                            setSuccess) : onFail(setModalVisible, setSuccess)
 }
 
 //ohuenno

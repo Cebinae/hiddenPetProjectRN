@@ -8,7 +8,7 @@ const defaultPublicKey = "ae6e8586d1cb4a35e156f89573d06cc9b54abaab5f30c9009ea842
 const defaultPtivateKey = "7adee52c88b8392d86f1110e13172584cda92a5c7ec8d49ad44f262a90d41093ae6e8586d1cb4a35e156f89573d06cc9b54abaab5f30c9009ea842958d1ce8ac";
 const host = 'api.dmarket.com';
 
-
+//common util for any requests here
 export const getResponse=async(
                                     pubKey?:string, 
                                     secKey?:string, 

@@ -3,7 +3,7 @@ const items = [
     'USP-S | Night Ops',      //that already used by validation
     'USP-S | Flashback',
     'USP-S | Torque',          // usp, glock, awp, ak, m4a4
-    'USP-S | Check Engine',
+    'USP-S | Check Engine',     //consider using json instead...
     'USP-S | Lead Conduit',
     'USP-S | Ticket to Hell',
     'USP-S | Blood Tiger',
