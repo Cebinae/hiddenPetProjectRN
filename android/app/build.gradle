@@ -135,7 +135,9 @@ android {
             signingConfig signingConfigs.debug
             // minifyEnabled enableProguardInReleaseBuilds
             minifyEnabled true
-            shrinkResources false
+            shrinkResources true  //keep false to prevent native library about navbar being shrinked !!!!!
+                                    //ok, ill try to enable, but aupdate proguard-rules.pro with class exception 
+                                    //class of that module can be found in node_modules/package_dir...somwhere there .java
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }

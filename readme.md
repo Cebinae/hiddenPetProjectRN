@@ -3,7 +3,9 @@
 
 The main purpose of this application is to provide ecnanced tool
 for trading CS:GO skins on the most popular marketplace of csgo ecosystem - Dmarket.com. Depending on personal strategy, it will either save your time or increase incomes by giving a significant advantage in ability to rely on SkinHunter's background service instead of daily seeking of profitable offers.
-Some minor fixes upcoming.
+
+It's light-weight, secure, well-optimised and offers adaptive UI, so feel free to try it out!
+
 
 
 
@@ -15,7 +17,7 @@ Some minor fixes upcoming.
 
 ## Installation
 
--     Install attached SkinHunter.apk file
+-     Download and install attached SKINHUNTER.apk (in root folder, size=20Mb)
 -     Or build your own .apk
   - Install required dependencies after cloning this repo (npm install)
   -  If you want to build debug version, just type 
@@ -35,6 +37,8 @@ Some minor fixes upcoming.
   ./gradlew assembleRelease
   ```
   Please note, even tho release error with 'duplicated assets' is not reproducing now, you may need to delete warned assets of react-native-navigation manually if error occurs. (ctrl+clink on every warned asset in VScode console will navigate to asset path)
+    - ok,  seems like i completely fixed that, but keep in mind
+  
 
 
 
@@ -47,12 +51,12 @@ Some minor fixes upcoming.
 ![login screen](https://iili.io/Hs5UPX1.png)
 
 ### Configuring service
-- Depending on you strategy you may want to set different filters
-  - Enter skin title(s) you desire to track and save changes. Each title need to be typed only once in the whole list of tracked skins. Currently saved titles will be shown as a placeholder of field. To delete saved title press on empty field with a placeholder and 'clear' button will appear.
+- Depending on your strategy you may want to configure different filters
+  - Type skin title(s) you desire to track and save changes. Each title need to be typed only once in the whole list of tracked skins. Currently saved titles will be shown as a placeholder of field. To delete saved title press on empty field with a placeholder and 'clear' button will appear.
   - Pick filters for each section of titles. Filters only apply for skins in the same section. 
   - Skins that didn't pass filters won't be shown
 
-  ![setLists screen](https://iili.io/Hs5UQ1a.png)
+  ![setLists screen](https://iili.io/HsDxudG.png)
 
 ### Service results
 -  Waiting until result appears may take a while depending on case
@@ -65,11 +69,14 @@ Some minor fixes upcoming.
 - At the top you can see you current profile information and balance in USD if you're logged or a suggestion to Log In if you're unlogged now.
 - 'Should display...' switch defines if only offers that were created during the service will be shown. May be useful to get rid of outdated offers that passed filters. If NO, alredy existed offers will be shown, but ofc you will not be notificated about that.
 - 'Delay' switch allows to basically select delay between each request to server. As rate limits that noticed in API documentation seems to be uncorrect, application provides custom values based on author usage experience.
-
 ![setLists screen](https://iili.io/Hs5gf2f.png)
+### Notifications
+- You will get notification instantly as service find a deal that fits configuration
+- If there's olnly one new offer, as it usually hapens, you will get single notification
+- If there's many of them, notifications will be grouped according to their titles
+
+![notifications screen](https://iili.io/HsDI9Sa.png)
 ## FAQ
 ### Is this even safe?
 - Yes, your keys are never stored unencrypted. Application uses react-native-keychain to store credentials. Application gets keys from encrypted storage and passes them to temporary storage each time application starts. 
 - If you're still afraid, feel free to create a new empty account on dmarket and use API keys from there. It requires only email.
-
-(to be updated if i find some not disclosed questions)
